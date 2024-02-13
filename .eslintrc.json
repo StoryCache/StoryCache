@@ -8,7 +8,12 @@
     "node": true
   },
   "extends": "eslint:recommended",
-  "parserOptions": { "sourceType": "module" },
+  "parserOptions": { 
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    } 
+  },
   "rules": {
     "indent": ["warn", 2],
     "no-unused-vars": ["off", { "vars": "local" }],

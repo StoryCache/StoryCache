@@ -1,12 +1,12 @@
-const Entry = require('../models/entryModel');
+const pool = require('../models/dbModel');
 
 const entryController = {
   postEntry: (req, res, next) => {
     const { content } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     // const newEntry = Entry.create(content);
 
-    Entry.create({ content })
+    pool.create({ content })
       .then((entry) => {
         // TODO: decide if send status here or store on locals
         // res.status(200).json(entry);
@@ -19,7 +19,7 @@ const entryController = {
   },
 
   getEntries: (req, res, next) => {
-    Entry.find({})
+    pool.find({})
       .then((entries) => {
         res.locals.entries = entries;
         next();
@@ -33,7 +33,7 @@ const entryController = {
     // TODO: figure out if id will be sent as params
     const { id } = req.params;
     
-    Entry.findByIdAndDelete(id)
+    pool.findByIdAndDelete(id)
       .then((deletedEnt) => {
         if (deletedEnt !== null) {
           res.status(200).json({ message: 'Deleted successfully' });

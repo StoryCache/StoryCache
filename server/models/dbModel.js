@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
-const Entry = new Pool({
+const pool = new Pool({
   connectionString: process.env.PG_URI,
 });
 
-module.exports = Entry; 
+module.exports = pool; 
