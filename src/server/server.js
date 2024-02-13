@@ -17,7 +17,6 @@ app.use(express.static("dist/app"))
 
 // Handle client routing, return all requests to the app
 app.get("*", (_req, res) => {
-  console.log(`~~~~~~~~~~~~~~~~~~~~~~hello server`)
   res.sendFile(path.join(__dirname, "../../dist/app/index.html"))
 })
 
