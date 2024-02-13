@@ -1,30 +1,17 @@
 const express = require("express")
 const authRouter = express.Router()
 const userController = require('../controllers/userController');
-const cookieController = require('../controllers/cookieController');
-const sessionController = require('../controllers/sessionController');
-
-authRouter.get("/login", async (_req, res) => {
-  res.status(200).json({ message: "Hello logging in!" })
-})
-
-/**
- * signup
- */
-// authRouter.get('/signup', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../client/signup.html'));
-//   });
+// const cookieController = require('../controllers/cookieController');
 
 authRouter.post(
   "/signup",
   userController.createUser,
-  cookieController.setSSIDCookie,
-  sessionController.startSession,
+//   cookieController.setSSIDCookie,
   (req, res) => {
-    //cookieController.setSSIDCookie,
     // what should happen here on successful sign up?
-    console.log("successful user creation. redirecting to secret")
-    res.redirect("/secret") //path.resolve(__dirname, '../client
+    // console.log("successful user creation. redirecting to secret")
+    // res.redirect("/secret") //path.resolve(__dirname, '../client
+    res.status(200).json({ message: "signing up" })
   },
 )
 
@@ -34,19 +21,18 @@ authRouter.post(
 authRouter.post(
   "/login",
   userController.verifyUser,
-  cookieController.setSSIDCookie,
-  sessionController.startSession,
+//   cookieController.setSSIDCookie,
   (req, res) => {
-    //cookieController.setSSIDCookie,
     // what should happen here on successful log in?
     // console.log('response object.cookie:', res.cookie.ssid);
     if (!res.locals.loginSuccess) {
       console.log("login unsuccessful!")
-
-      res.redirect("/signup")
+    //   res.redirect("/signup")
+      res.status(200).json({ message: "login unsuccessful" })
     } else {
       console.log("login successful!")
-      res.redirect("/secret")
+    //   res.redirect("/home")
+    res.status(200).json({ message: "login successful, redirect to /home" })
     }
   },
 )

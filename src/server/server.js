@@ -27,7 +27,7 @@ app.get("*", (_req, res) => {
 })
 
 app.use((req, res) => {
-  res.status(404).send('Express failed');
+  res.status(404).send('File not found');
 });
 
 app.use((err, req, res, next) => {
