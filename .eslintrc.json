@@ -1,25 +1,35 @@
 {
+  "extends": [
+    "eslint:recommended",
+    "react-app",
+    "plugin:react/jsx-runtime",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": true, "tsconfigRootDir": "./" },
+  "plugins": ["@typescript-eslint"],
   "root": true,
-  "ignorePatterns": "**/util",
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "jquery": true,
-    "node": true
-  },
-  "extends": "eslint:recommended",
-  "parserOptions": { 
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    } 
-  },
+  "ignorePatterns": ["dist"],
   "rules": {
-    "indent": ["warn", 2],
-    "no-unused-vars": ["off", { "vars": "local" }],
-    "prefer-const": "warn",
-    "quotes": ["warn", "single"],
-    "semi": ["warn", "always"],
-    "space-infix-ops": "warn"
-  }
+    "@typescript-eslint/consistent-type-imports": [
+      2,
+      { "fixStyle": "separate-type-imports" }
+    ],
+    "@typescript-eslint/no-restricted-imports": [
+      2,
+      {
+        "paths": [
+          {
+            "name": "react-redux",
+            "importNames": ["useSelector", "useStore", "useDispatch"],
+            "message": "Please use pre-typed versions from `src/app/hooks.ts` instead."
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    { "files": ["*.{c,m,}{t,j}s", "*.{t,j}sx"] },
+    { "files": ["*{test,spec}.{t,j}s?(x)"], "env": { "jest": true } }
+  ]
 }
