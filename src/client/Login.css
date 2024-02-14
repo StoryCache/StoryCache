@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+  font-family: 'Noto Serif Display';
+  src: url(https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap);
+}
+
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: Noto Serif Display;
   }
   
   .login-form {
