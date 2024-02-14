@@ -7,6 +7,17 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        // TODO: signup logic build here
+
+        if (password !== confirmPassword) {
+            alert("Passwords don't match.")
+            return;
+        }
+    }
+
     return (
         <div className="signup-container">
             <form className="signup-form" onSubmit={handleSubmit}>
@@ -41,7 +52,20 @@ const Signup = () => {
                       required
                     />
                 </div>
+                <div className="input-group">
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                    />
+                </div>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
     )
 }
+
+export default Signup;
