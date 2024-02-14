@@ -16,7 +16,7 @@ userController.createUser = async (req, res, next) => {
     const queryText = `INSERT INTO users (email, password) VALUES ($1, $2) RETURNING _id; `
     const result = await pool.query(queryText, [email, hashedPassword])
     res.locals.id = result.rows[0]._id
-    console.log(res.locals.id);
+    console.log(res.locals.id)
     return next()
   } catch (error) {
     return next({
@@ -32,38 +32,24 @@ userController.createUser = async (req, res, next) => {
  * against the password stored in the database.
  */
 userController.verifyUser = async (req, res, next) => {
-  //async (req, res, next) => {
-  // write code here
-  // console.log('trying to verify user');
-  const { username, password } = req.body
-  console.log(username, password)
-  if (username && password) res.locals.loginSuccess = true
-  // const verifyUser = await User.find({username, password});
-  // User.findOne({username, password}, (err, user) => {
-  //   if (err || !user) {
-  //     return next({
-  //       log: 'Express error handler caught verifyUser error: Username/Password not recognized',
-  //       status: 401,
-  //       message: { err: 'Username/Password not recognized'}});
-  //   } else {
-  //     res.locals.loginSuccess = true;
-  //     return next();
-  //   }
-  return next()
-  // });
-  // console.log('verify user:', verifyUser.length);
-  // if (verifyUser.length === 1) {
-  //   res.locals.loginSuccess = true;
-  //   // console.log('login successful!');
-  //   return next();
-  // } else {
-  //   res.locals.loginSuccess = false;
-  //   next({
-  //     log: 'Express error handler caught verifyUser error: Username/Password not recognized',
-  //     status: 500,
-  //     message: { err: 'Username/Password not recognized'}
-  //   })
-  // }
+  const { email, password } = req.body
+  console.log(email, password)
+
+  try {
+    const queryText = `SELECT password, _id FROM users WHERE email = $1;`
+    const result = await pool.query(queryText, [email])
+    const hashedPassword = result.rows[0].password
+    const isPasswordValid = await bcrypt.compare(password, hashedPassword)
+    if (isPasswordValid) res.locals.id = result.rows[0]._id
+
+    return next()
+  } catch {
+    return next({
+      log: "Express error handler caught verifyUser error: Username/Password not recognized",
+      status: 401,
+      message: { err: "Username/Password not recognized" },
+    })
+  }
 }
 
 module.exports = userController
