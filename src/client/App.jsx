@@ -38,14 +38,13 @@ const App = () => {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      <div>
+      <div className="card-container">
         {searchResults.map((book) => (
           // let picture = book.volumeInfo.imageLinks.medium
-          <div key={book.id}>
+          <div className="card" key={book.id}>
             {/* Display book information */}
             <h2>{book.volumeInfo.title}</h2>
             <p>{book.volumeInfo.authors.join(', ')}</p>
-            <p>{book.volumeInfo.description}</p>
             <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="bookimg"></img>
           </div>
         ))}
