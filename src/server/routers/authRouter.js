@@ -2,6 +2,9 @@ const express = require("express")
 const authRouter = express.Router()
 const userController = require("../controllers/userController")
 const cookieController = require("../controllers/cookieController")
+authRouter.use(express.json());
+authRouter.use(express.urlencoded());
+// authRouter.use(cookieParser());
 
 authRouter.post(
   "/signup",
@@ -11,7 +14,7 @@ authRouter.post(
     // what should happen here on successful sign up?
     // console.log("successful user creation. redirecting to secret")
     // res.redirect("/secret") //path.resolve(__dirname, '../client
-    res.status(200).json({ message: "signed up" })
+    return res.status(200).json(res.locals.id);
   },
 )
 
@@ -31,7 +34,7 @@ authRouter.post(
     } else {
       console.log("login successful!")
       //   res.redirect("/home")
-      res.status(200).json({ message: "login successful, redirect to /home" })
+      return res.status(200).json(res.locals.id);
     }
   },
 )

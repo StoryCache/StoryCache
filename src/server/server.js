@@ -3,6 +3,7 @@ const express = require("express");
 const router = require("./routers/router");
 const authRouter = require("./routers/authRouter");
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const PORT = 3001
 
@@ -11,6 +12,7 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
+app.use(cors());
 
 // Serve authorization requests from the authRouter
 app.use("/auth", authRouter)
