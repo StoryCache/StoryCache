@@ -20,16 +20,16 @@ cookieController.setSSIDCookie = (req, res, next) => {
   // write code here
   console.log("entering setSSIDCookie middleware")
   const { email } = req.body
-  if (!email) {
+  if (!email || !res.locals.id) {
     return next({
-      log: 'Error in setSSIDCookie middleware',
+      log: "Error in setSSIDCookie middleware",
       status: 500,
-      message: { err: 'Error in setSSIDCookie middleware' },
+      message: { err: "Error in setSSIDCookie middleware" },
     })
   }
-    res.cookie("ssid", res.locals.id, { httpOnly: true })
-    console.log("ssid cookie set to ", res.locals.id)
-    return next();
+  res.cookie("ssid", res.locals.id, { httpOnly: true })
+  console.log("ssid cookie set to ", res.locals.id)
+  return next()
 }
 
 module.exports = cookieController

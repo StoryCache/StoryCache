@@ -36,12 +36,11 @@ userController.verifyUser = async (req, res, next) => {
   console.log(email, password)
 
   try {
-    const queryText = `SELECT password FROM users WHERE email = $1;`
+    const queryText = `SELECT password, _id FROM users WHERE email = $1;`
     const result = await pool.query(queryText, [email])
     const hashedPassword = result.rows[0].password
-    console.log(hashedPassword)
     const isPasswordValid = await bcrypt.compare(password, hashedPassword)
-    console.log(isPasswordValid)
+    if (isPasswordValid) res.locals.id = result.rows[0]._id
 
     return next()
   } catch {

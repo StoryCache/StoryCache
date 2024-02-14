@@ -23,9 +23,8 @@ authRouter.post(
   userController.verifyUser,
   cookieController.setSSIDCookie,
   (req, res) => {
-    // what should happen here on successful log in?
-    // console.log('response object.cookie:', res.cookie.ssid);
-    if (!res.cookies.ssid) {
+    console.log(res.locals.id)
+    if (!res.locals.id) {
       console.log("login unsuccessful!")
       //   res.redirect("/signup")
       res.status(200).json({ message: "login unsuccessful" })
