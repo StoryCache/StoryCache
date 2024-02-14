@@ -3,6 +3,7 @@ const authRouter = express.Router()
 const userController = require("../controllers/userController")
 const cookieController = require("../controllers/cookieController")
 
+
 authRouter.post(
   "/signup",
   userController.createUser,
