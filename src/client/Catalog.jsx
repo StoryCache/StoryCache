@@ -56,7 +56,6 @@ const Catalog = () => {
       </div>
       <h2>Catalog</h2>
       <div className="catalog-container">
-        {catalog.length}
         {catalog.map(book => (
           <div className="card" key={book.gb_id}>
             <h3 className="title">{book.title}</h3>
@@ -66,7 +65,6 @@ const Catalog = () => {
             <button className="add-button" onClick={() => deleteBook(book)}>Delete</button>
           </div>
           </div>
-          
         ))}
       </div>
     </div>
