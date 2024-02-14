@@ -2,9 +2,6 @@ const express = require("express")
 const authRouter = express.Router()
 const userController = require("../controllers/userController")
 const cookieController = require("../controllers/cookieController")
-authRouter.use(express.json());
-authRouter.use(express.urlencoded());
-// authRouter.use(cookieParser());
 
 authRouter.post(
   "/signup",

@@ -6,8 +6,8 @@ const Signup = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const navigate = useNavigate();
-  
+  const navigate = useNavigate()
+
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -29,6 +29,7 @@ const Signup = () => {
         body: JSON.stringify(loginData),
       })
       if (loginInfo.ok) {
+        console.log(loginInfo);
         navigate("/home")
       } else {
         setEmail("")
