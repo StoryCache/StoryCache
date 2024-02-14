@@ -31,7 +31,7 @@ const Catalog = () => {
         </Link>
       </div>
       <h2>Catalog</h2>
-      <div className="card-container">
+      <div className="catalog-container">
         {catalog.length}
         {catalog.map(book => (
           <div className="card" key={book.gb_id}>

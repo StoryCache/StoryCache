@@ -95,6 +95,8 @@ body {
   transition: 0.3s;
   background-color: var(--black);
   color: var(--cream);
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
@@ -104,6 +106,7 @@ body {
 .card img {
   width: 70%;
   height: auto;
+  transition: transform .2s;
 }
 
 /* .title {
