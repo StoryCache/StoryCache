@@ -1,5 +1,6 @@
 import "./App.css"
 import { useState, useEffect } from "react";
+import placeholderBookSVG from './Placeholder_book.svg';
 import Catalog from "./Catalog";
 import { Link } from "react-router-dom";
 
@@ -83,7 +84,11 @@ const App = () => {
           <div className="card" key={book.id}>
             <h2 className="title">{book.volumeInfo.title}</h2>
             <p>{book.volumeInfo.authors.join(', ')}</p>
-            <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="bookimg"></img>
+            {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
+        <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book cover" />
+      ) : (
+        <img src={placeholderBookSVG} alt="default book cover" />
+      )}
             <div>
               <button className="add-button" onClick={() => addToCatalog(book)}>Add</button></div>
           </div>
