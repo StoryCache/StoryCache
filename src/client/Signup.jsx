@@ -31,6 +31,16 @@ const Signup = () => {
                       required
                     />
                 </div>
+                <div className="input-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                </div>
             </form>
         </div>
     )
