@@ -5,7 +5,7 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client:dev": "vite",
     "server:dev": "nodemon src/server/server.js",
-    "start": "vite",
+    "start": "node src/server/server.js",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",

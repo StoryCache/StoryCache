@@ -1,23 +1,27 @@
 import React, { useState } from "react"
-import "./Login.css" // Importing CSS for styling
+import "./Signup.css"
 import { useNavigate } from "react-router-dom"
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  const [confirmPassword, setConfirmPassword] = useState("")
   const navigate = useNavigate()
 
   const handleSubmit = async e => {
     e.preventDefault()
 
-    // Implement your login logic here
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.")
+      return
+    }
+    // TODO: signup logic build here
     const loginData = {
       email,
       password,
     }
     try {
-      const loginInfo = await fetch("/auth/login", {
+      const loginInfo = await fetch("/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,25 +29,26 @@ const Login = () => {
         body: JSON.stringify(loginData),
       })
       if (loginInfo.ok) {
+        console.log(loginInfo);
         navigate("/home")
       } else {
-        setEmail("");
-        setPassword("");
+        setEmail("")
+        setPassword("")
+        setConfirmPassword("")
       }
     } catch (error) {
-      console.error("Error logging in ", error)
+      console.error("Error signing up in ", error)
     }
-    // console.log("Logging in with:", email, password)
   }
 
-  const navigateToSignUp = () => {
-    navigate("/signup")
+  const navigateToLogin = () => {
+    navigate("/");
   }
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h2>Sign Up</h2>
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input
@@ -64,13 +69,21 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
-        <button type="button" onClick={navigateToSignUp} className="signup-button">
-          Sign Up
-        </button>
+        <div className="input-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Sign Up</button>
+        <button type="button" onClick={navigateToLogin}>Back to Log In</button>
       </form>
     </div>
   )
 }
 
-export default Login
+export default Signup

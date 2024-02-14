@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client"
 // import { Provider } from "react-redux"
 import App from "./App.jsx";
 import Login from "./Login.jsx"
+import Signup from "./Signup.jsx"
+import Catalog from "./Catalog.jsx"
 // import { store } from "./app/store"
 import "./index.css"
 // import * as ReactDOM from"react-dom/client";
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />
+  },
+  {
+    path: "/signup",
+    element: <Signup />
+  },
+  {
+    path: "/catalog",
+    element: <Catalog />
   },
   {
     path: "/home",

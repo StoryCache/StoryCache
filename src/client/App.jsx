@@ -1,5 +1,6 @@
 import "./App.css"
 import { useState, useEffect } from "react";
+import placeholderBookSVG from './Placeholder_book.svg';
 
 
 const App = () => {
@@ -27,7 +28,7 @@ const App = () => {
   return (
     <div className="App">
       <header>
-        <h1>My Book Catalog</h1>
+        <h1 className="header">Search For Books</h1>
       </header>
       <div className="search-bar">
         <input
@@ -40,13 +41,16 @@ const App = () => {
       </div>
       <div className="card-container">
         {searchResults.map((book) => (
-          // let picture = book.volumeInfo.imageLinks.medium
           <div className="card" key={book.id}>
-            {/* Display book information */}
-            <h2>{book.volumeInfo.title}</h2>
+            <h2 className="title">{book.volumeInfo.title}</h2>
             <p>{book.volumeInfo.authors.join(', ')}</p>
-            <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="bookimg"></img>
-            <div><button onClick={() => addToCatalog(book)}>Add</button></div>
+            {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
+        <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book cover" />
+      ) : (
+        <img src={placeholderBookSVG} alt="default book cover" />
+      )}
+            <div>
+              <button className="add-button" onClick={() => addToCatalog(book)}>Add</button></div>
           </div>
         ))}
       </div>

@@ -8,8 +8,9 @@ const pool = require("../models/dbModel")
  * createUser - create and save a new User into the database.
  */
 userController.createUser = async (req, res, next) => {
-  console.log("entering createUser middleware")
+  // console.log("entering createUser middleware")
   const { email, password } = req.body
+  // console.log(email, password);
   try {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
@@ -32,9 +33,10 @@ userController.createUser = async (req, res, next) => {
  * against the password stored in the database.
  */
 userController.verifyUser = async (req, res, next) => {
+  // console.log('entering verify user middleware');
   const { email, password } = req.body
-  console.log(email, password)
-
+  // console.log(req.body);
+  // console.log(email, password);
   try {
     const queryText = `SELECT password, _id FROM users WHERE email = $1;`
     const result = await pool.query(queryText, [email])
