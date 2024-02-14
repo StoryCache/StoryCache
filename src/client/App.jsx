@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [catalog, setCatalog] = useState([]);
+  // const [catalog, setCatalog] = useState([]);
 
   const handleSearch = async () => {
     try {
@@ -51,7 +51,7 @@ const App = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('book added', data);
-        setCatalog([...catalog, book]);
+        // setCatalog([...catalog, book]);
       } else {
         console.error("Error adding book: ", response.statusText);
       }
@@ -94,7 +94,7 @@ const App = () => {
           </div>
         ))}
       </div>
-      <Catalog catalog={catalog} />
+      {/* <Catalog catalog={catalog} /> */}
     </div>
   );
 }
