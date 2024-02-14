@@ -4,6 +4,7 @@ const booksController = require("../controllers/bookController")
 const router = express.Router()
 
 router.get("/", booksController.getBooks, (_req, res) => {
+  console.log('exited getbooks array, sending array of length', res.locals.books.length)
   res.status(200).json(res.locals.books)
 })
 

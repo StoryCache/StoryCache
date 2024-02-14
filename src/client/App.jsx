@@ -1,12 +1,14 @@
 import "./App.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import placeholderBookSVG from './Placeholder_book.svg';
+import Catalog from "./Catalog";
 import { Link } from "react-router-dom";
 
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [catalog, setCatalog] = useState([]);
+  // const [catalog, setCatalog] = useState([]);
 
   const handleSearch = async () => {
     try {
@@ -23,7 +25,7 @@ const App = () => {
 
   const addToCatalog = async (book) => {
     // moved this code into the try block on success
-    // setCatalog([...catalog, book]); 
+    // setCatalog([...catalog, book]);
 
     //fetch request to post book to user books table
     const bookData = {
@@ -32,12 +34,12 @@ const App = () => {
       title: book.volumeInfo.title,
       author: book.volumeInfo.authors.join(', '),
       img_url: book.volumeInfo.imageLinks.smallThumbnail,
-      own: false, 
-      read: false, 
-      to_read: false, 
+      own: false,
+      read: false,
+      to_read: false,
       rating: false
     };
-    // console.log(bookData);
+    console.log(bookData);
     try {
       const response = await fetch("/api", {
         method: "POST",
@@ -46,9 +48,12 @@ const App = () => {
         },
         body: JSON.stringify(bookData),
       })
-      if (bookData.ok) {
-        console.log('book added,',response);
-        setCatalog([...catalog, book]);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('book added', data);
+        // setCatalog([...catalog, book]);
+      } else {
+        console.error("Error adding book: ", response.statusText);
       }
     } catch (error) {
       console.error("Error adding book, ", error)
@@ -81,12 +86,17 @@ const App = () => {
           <div className="card" key={book.id}>
             <h2 className="title">{book.volumeInfo.title}</h2>
             <p>{book.volumeInfo.authors.join(', ')}</p>
-            <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="bookimg"></img>
+            {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
+        <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book cover" />
+      ) : (
+        <img src={placeholderBookSVG} alt="default book cover" />
+      )}
             <div>
               <button className="add-button" onClick={() => addToCatalog(book)}>Add</button></div>
           </div>
         ))}
       </div>
+      {/* <Catalog catalog={catalog} /> */}
     </div>
   );
 }
