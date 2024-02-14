@@ -1,5 +1,6 @@
 import "./App.css"
 import { useState, useEffect } from "react";
+import placeholderBookSVG from './Placeholder_book.svg';
 
 
 const App = () => {
@@ -46,7 +47,7 @@ const App = () => {
             {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
         <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book cover" />
       ) : (
-        <div>Image not Found</div> // Provide a path to a default image
+        <img src={placeholderBookSVG} alt="default book cover" />
       )}
             <div>
               <button className="add-button" onClick={() => addToCatalog(book)}>Add</button></div>
