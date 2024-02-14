@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
-const router = require("./lib/router");
-const authRouter = require("./lib/authRouter");
+const router = require("./routers/router");
+const authRouter = require("./routers/authRouter");
 const cookieParser = require('cookie-parser');
 
 const PORT = 3001
