@@ -21,6 +21,16 @@ const Signup = () => {
                       required
                     />
                 </div>
+                <div className="input-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                </div>
             </form>
         </div>
     )
