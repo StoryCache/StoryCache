@@ -27,7 +27,7 @@ cookieController.setSSIDCookie = (req, res, next) => {
       message: { err: "Error in setSSIDCookie middleware" },
     })
   }
-  res.cookie("ssid", res.locals.id, { httpOnly: true }) //is this httpOnly key needed?
+  res.cookie("ssid", res.locals.id, { httpOnly: true, sameSite: 'None', secure: true }) //is this httpOnly key needed?
   // console.log("ssid cookie set to ", res.locals.id)
   return next()
 }

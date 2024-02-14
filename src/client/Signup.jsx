@@ -21,7 +21,7 @@ const Signup = () => {
       password,
     }
     try {
-      const loginInfo = await fetch("http://localhost:3001/auth/signup", {
+      const loginInfo = await fetch("/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

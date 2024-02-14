@@ -17,7 +17,7 @@ const Login = () => {
       password,
     }
     try {
-      const loginInfo = await fetch("http://localhost:3001/auth/login", {
+      const loginInfo = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
