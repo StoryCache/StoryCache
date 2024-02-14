@@ -23,6 +23,30 @@ const Catalog = () => {
     fetchBooks()
   }, [])
 
+  const deleteBook = async (book) => {
+    //post request
+    //pass in gb id as req.body
+    const options = {
+      method: 'DELETE',
+      body: JSON.stringify({
+        gb_id: book.gb_id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const response = await fetch("/api", options)
+      const message = await response.json()
+      if (response.ok) {
+        fetchBooks();
+        console.log(message);
+      }
+    } catch (error) {
+      console.error(`Error in deleting book ${error}`)
+    }
+  }
+
   return (
     <div className="Catalog">
       <div>
@@ -38,7 +62,11 @@ const Catalog = () => {
             <h3 className="title">{book.title}</h3>
             <p>{book.authors}</p>
             <img src={book.img_url} alt="bookimg"></img>
+            <div>
+            <button className="add-button" onClick={() => deleteBook(book)}>Delete</button>
           </div>
+          </div>
+          
         ))}
       </div>
     </div>
