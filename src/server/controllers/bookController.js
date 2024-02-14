@@ -3,9 +3,9 @@ const pool = require("../models/dbModel")
 const booksController = {}
 
 booksController.getBooks = async (req, res, next) => {
-  console.log('entering getbooks middleware')
+  console.log("entering getbooks middleware")
   const { ssid } = req.cookies
-  console.log('running query with ssid ', ssid);
+  console.log("running query with ssid ", ssid)
   try {
     // we will use these queries when cookies are set up on the front end:
     const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books WHERE user_id = $1; `
@@ -94,6 +94,7 @@ booksController.putBooks = async (req, res, next) => {
 }
 
 booksController.deleteBooks = async (req, res, next) => {
+  console.log('entering delete books middleware');
   const { ssid } = req.cookies
   const { gb_id } = req.body
   try {
