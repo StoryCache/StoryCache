@@ -3,8 +3,9 @@ const pool = require("../models/dbModel")
 const booksController = {}
 
 booksController.getBooks = async (req, res, next) => {
+  console.log('entering getbooks middleware')
   const { ssid } = req.cookies
-
+  console.log('running query with ssid ', ssid);
   try {
     // we will use these queries when cookies are set up on the front end:
     const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books WHERE user_id = $1; `
@@ -12,6 +13,7 @@ booksController.getBooks = async (req, res, next) => {
     // const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books; `
     // const result = await pool.query(queryText)
     //what does the data look like in results with a list of all books in the user's books db?
+    console.log(result.rows)
     res.locals.books = result.rows
     return next()
   } catch (error) {
