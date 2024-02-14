@@ -59,6 +59,7 @@ body {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
   background-color: var(--cream);
   color: var(--black);
+  font-family: Noto Serif Display;
 }
 
 .search-bar button {
@@ -70,6 +71,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   width: 75px;
+  font-family: Noto Serif Display;
 }
 
 .search-bar button:hover {
@@ -95,6 +97,8 @@ body {
   transition: 0.3s;
   background-color: var(--black);
   color: var(--cream);
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
@@ -104,6 +108,7 @@ body {
 .card img {
   width: 70%;
   height: auto;
+  transition: transform .2s;
 }
 
 /* .title {
@@ -131,6 +136,7 @@ body {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Noto Serif Display;
 }
 
 .Catalog-Button {
