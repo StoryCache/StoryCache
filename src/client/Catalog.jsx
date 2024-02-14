@@ -2,15 +2,26 @@ import "./Catalog.css"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Catalog = ({ catalog }) => {
-    if (!catalog || catalog.length === 0) {
-        return <div className="Catalog">Catalog is Empty</div>;
+const Catalog = () => {
+    const [catalog, setCatalog] = useState([])
+
+    if (catalog.length === 0) {
+        <div className="Catalog">Catalog is Empty</div>;
       }
-    
+      
+      useEffect(()=>{async()=>{
+        try{
+          const books = await fetch('/api')
+          if(books.ok) setCatalog(books)
+        } catch(error){
+          console.log(`Error in getCatalog ${error}` )
+        }
+      }}, [catalog])
+
     return (
       <div className="Catalog">
         <div>
-        <Link to="/home">
+        <Link to="/search">
         <button className="Search-Button">Search For A Book</button>
       </Link>
         </div>

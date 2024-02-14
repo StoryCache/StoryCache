@@ -6,22 +6,22 @@
 }
 
 .Catalog {
-    font-family: Noto Serif Display;
-    text-align: center;
-    background-color: var(--black);
-    color: var(--cream);
-  }
+  font-family: Noto Serif Display;
+  text-align: center;
+  background-color: var(--black);
+  color: var(--cream);
+}
 
-  .Catalog-header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: var(--tan);
-  }
+.Catalog-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--tan);
+}
 
 .Search-Button {
-    font-family: Noto Serif Display;
+  font-family: Noto Serif Display;
 }
