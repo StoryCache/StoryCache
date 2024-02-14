@@ -43,7 +43,11 @@ const App = () => {
           <div className="card" key={book.id}>
             <h2 className="title">{book.volumeInfo.title}</h2>
             <p>{book.volumeInfo.authors.join(', ')}</p>
-            <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="bookimg"></img>
+            {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
+        <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book cover" />
+      ) : (
+        <div>Image not Found</div> // Provide a path to a default image
+      )}
             <div>
               <button className="add-button" onClick={() => addToCatalog(book)}>Add</button></div>
           </div>
