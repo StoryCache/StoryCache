@@ -1,27 +1,52 @@
-import React, { useState } from 'react';
-import './Login.css'; // Importing CSS for styling
+import React, { useState } from "react"
+import "./Login.css" // Importing CSS for styling
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const navigate = useNavigate()
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
     // Implement your login logic here
-    console.log('Logging in with:', username, password);
-  };
+    const loginData = {
+      email,
+      password,
+    }
+    try {
+      const loginInfo = await fetch("/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      })
+      if (loginInfo.ok) {
+        navigate("/home")
+      } else {
+        setEmail("");
+        setPassword("");
+      }
+    } catch (error) {
+      console.error("Error logging in ", error)
+    }
+    // console.log("Logging in with:", email, password)
+  }
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="input-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
             required
           />
         </div>
@@ -31,14 +56,14 @@ const Login = () => {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
             required
           />
         </div>
         <button type="submit">Login</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
