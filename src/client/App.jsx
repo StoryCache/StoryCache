@@ -1,12 +1,14 @@
 import "./App.css"
 import { useState, useEffect } from "react";
 import placeholderBookSVG from './Placeholder_book.svg';
+import Catalog from "./Catalog";
+import { Link } from "react-router-dom";
 
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [catalog, setCatalog] = useState([]);
+  // const [catalog, setCatalog] = useState([]);
 
   const handleSearch = async () => {
     try {
@@ -21,12 +23,50 @@ const App = () => {
     }
   };
 
-  const addToCatalog = (book) => {
-    setCatalog([...catalog, book]);
+  const addToCatalog = async (book) => {
+    // moved this code into the try block on success
+    // setCatalog([...catalog, book]);
+
+    //fetch request to post book to user books table
+    const bookData = {
+      gb_id: book.id,
+      isbn: book.volumeInfo.industryIdentifiers[0].identifier,
+      title: book.volumeInfo.title,
+      author: book.volumeInfo.authors.join(', '),
+      img_url: book.volumeInfo.imageLinks.smallThumbnail,
+      own: false,
+      read: false,
+      to_read: false,
+      rating: false
+    };
+    console.log(bookData);
+    try {
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookData),
+      })
+      if (response.ok) {
+        const data = await response.json();
+        console.log('book added', data);
+        // setCatalog([...catalog, book]);
+      } else {
+        console.error("Error adding book: ", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error adding book, ", error)
+    }
   };
 
   return (
     <div className="App">
+      <div>
+      <Link to="/home">
+        <button className="Catalog-Button">Go To Your Catalog</button>
+      </Link>
+      </div>
       <header>
         <h1 className="header">Search For Books</h1>
       </header>
@@ -54,6 +94,7 @@ const App = () => {
           </div>
         ))}
       </div>
+      {/* <Catalog catalog={catalog} /> */}
     </div>
   );
 }

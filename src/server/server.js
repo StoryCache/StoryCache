@@ -9,7 +9,7 @@ const PORT = 3001
 const app = express()
 // Middleware that parses json and looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
-app.use(express.urlencoded());
+// app.use(express.urlencoded());
 app.use(cookieParser());
 
 // Serve authorization requests from the authRouter
