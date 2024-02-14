@@ -23,9 +23,8 @@ booksController.getBooks = async (req, res, next) => {
 }
 
 booksController.postBooks = async (req, res, next) => {
-  console.log("entering postBooks middleware")
+  // console.log("entering postBooks middleware")
   const { ssid } = req.cookies
-  console.log("req.body", req.body)
   const { gb_id, isbn, title, author, img_url, own, read, to_read, rating } =
     req.body
   console.log(
@@ -56,8 +55,6 @@ booksController.postBooks = async (req, res, next) => {
       rating,
       ssid,
     ])
-
-    //what does the data look like in results with a list of all books in the user's books db?
     console.log(result.rows[0])
     return next()
   } catch (error) {
