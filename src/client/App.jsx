@@ -1,4 +1,4 @@
-import "./HomePage.css"
+import "./App.css"
 import { useState, useEffect } from "react";
 
 
