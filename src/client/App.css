@@ -1,4 +1,10 @@
-/* Dark Academia Palette */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+  font-family: 'Noto Serif Display';
+  src: url(https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap);
+}
+
 :root {
   --dark-brown: #3D2C2E;
   --tan: #C5A68D;
@@ -7,17 +13,24 @@
   --gold: #A67C00;
 }
 
+.header {
+  color: white; /* Header text color */
+  text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000; /* Black outline */
+}
+
 body {
   background-color: var(--dark-brown);
-  /* background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg); */
   color: var(--cream);
 }
 
 .App {
+  font-family: Noto Serif Display;
   text-align: center;
   background-color: var(--black);
   color: var(--cream);
-  background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg);
 }
 
 .App-header {
@@ -49,13 +62,14 @@ body {
 }
 
 .search-bar button {
-  height: 35px;
+  height: 45px;
   border: none;
   color: var(--cream);
   background-color: var(--gold);
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  width: 75px;
 }
 
 .search-bar button:hover {
@@ -67,6 +81,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg);
 }
 
 .card {
@@ -75,7 +90,7 @@ body {
   border: 1px solid var(--tan);
   border-radius: 15px; 
   width: 200px;
-  height: 400px;
+  height: 450px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: 0.3s; 
   background-color: var(--black); 
@@ -90,6 +105,23 @@ body {
   width: 70%;
   height: auto;
 }
+
+/* .title {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+  transition: max-height 0.5s ease;
+  position: relative;
+}
+
+.title:hover {
+  overflow: visible;
+  height: auto;
+} */
+
 
 .add-button {
   height: 35px;
