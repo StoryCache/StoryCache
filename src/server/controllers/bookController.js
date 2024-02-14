@@ -7,10 +7,10 @@ booksController.getBooks = async (req, res, next) => {
 
   try {
     // we will use these queries when cookies are set up on the front end:
-    // const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books WHERE user_id = $1; `
-    // const result = await pool.query(queryText, [ssid])
-    const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books; `
-    const result = await pool.query(queryText)
+    const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books WHERE user_id = $1; `
+    const result = await pool.query(queryText, [ssid])
+    // const queryText = `SELECT gb_id, isbn, title, author, img_url, own, read, to_read, rating FROM books; `
+    // const result = await pool.query(queryText)
     //what does the data look like in results with a list of all books in the user's books db?
     res.locals.books = result.rows
     return next()
@@ -23,10 +23,24 @@ booksController.getBooks = async (req, res, next) => {
 }
 
 booksController.postBooks = async (req, res, next) => {
+  console.log("entering postBooks middleware")
   const { ssid } = req.cookies
+  console.log("req.body", req.body)
   const { gb_id, isbn, title, author, img_url, own, read, to_read, rating } =
     req.body
-
+  console.log(
+    "server received ",
+    gb_id,
+    isbn,
+    title,
+    author,
+    img_url,
+    own,
+    read,
+    to_read,
+    rating,
+    ssid,
+  )
   try {
     const queryText = `INSERT INTO books (gb_id, isbn, title, author, img_url, own, read, to_read, rating, user_id)
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10); `
