@@ -47,9 +47,12 @@ const App = () => {
         },
         body: JSON.stringify(bookData),
       })
-      if (bookData.ok) {
-        console.log('book added', response);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('book added', data);
         setCatalog([...catalog, book]);
+      } else {
+        console.error("Error adding book: ", response.statusText);
       }
     } catch (error) {
       console.error("Error adding book, ", error)
@@ -59,7 +62,7 @@ const App = () => {
   return (
     <div className="App">
       <div>
-      <Link to="/catalog">
+      <Link to="/home">
         <button className="Catalog-Button">Go To Your Catalog</button>
       </Link>
       </div>
