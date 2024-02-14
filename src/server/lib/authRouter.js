@@ -1,17 +1,17 @@
 const express = require("express")
 const authRouter = express.Router()
 const userController = require("../controllers/userController")
-// const cookieController = require('../controllers/cookieController');
+const cookieController = require("../controllers/cookieController")
 
 authRouter.post(
   "/signup",
   userController.createUser,
-  //   cookieController.setSSIDCookie,
+  cookieController.setSSIDCookie,
   (req, res) => {
     // what should happen here on successful sign up?
     // console.log("successful user creation. redirecting to secret")
     // res.redirect("/secret") //path.resolve(__dirname, '../client
-    res.status(200).json({ message: "signing up" })
+    res.status(200).json({ message: "signed up" })
   },
 )
 
@@ -21,7 +21,7 @@ authRouter.post(
 authRouter.post(
   "/login",
   userController.verifyUser,
-  //   cookieController.setSSIDCookie,
+  cookieController.setSSIDCookie,
   (req, res) => {
     // what should happen here on successful log in?
     // console.log('response object.cookie:', res.cookie.ssid);
