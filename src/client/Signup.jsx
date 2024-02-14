@@ -41,6 +41,10 @@ const Signup = () => {
     }
   }
 
+  const navigateToLogin = () => {
+    navigate("/");
+  }
+
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
@@ -76,6 +80,7 @@ const Signup = () => {
           />
         </div>
         <button type="submit">Sign Up</button>
+        <button type="button" onClick={navigateToLogin}>Back to Log In</button>
       </form>
     </div>
   )

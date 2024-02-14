@@ -36,6 +36,10 @@ const Login = () => {
     // console.log("Logging in with:", email, password)
   }
 
+  const navigateToSignUp = () => {
+    navigate("/signup")
+  }
+
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
@@ -61,6 +65,9 @@ const Login = () => {
           />
         </div>
         <button type="submit">Login</button>
+        <button type="button" onClick={navigateToSignUp} className="signup-button">
+          Sign Up
+        </button>
       </form>
     </div>
   )
