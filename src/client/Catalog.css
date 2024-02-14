@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+  font-family: 'Noto Serif Display';
+  src: url(https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap);
+}
+
+.Catalog {
+    font-family: Noto Serif Display;
+    text-align: center;
+    background-color: var(--black);
+    color: var(--cream);
+  }
+
+  .Catalog-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: var(--tan);
+  }
+
+.Search-Button {
+    font-family: Noto Serif Display;
+}

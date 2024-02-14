@@ -132,3 +132,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.Catalog-Button {
+  font-family: Noto Serif Display;
+}

@@ -1,5 +1,7 @@
 import "./App.css"
 import { useState, useEffect } from "react";
+import Catalog from "./Catalog";
+import { Link } from "react-router-dom";
 
 
 const App = () => {
@@ -26,6 +28,11 @@ const App = () => {
 
   return (
     <div className="App">
+      <div>
+      <Link to="/catalog">
+        <button className="Catalog-Button">Go To Your Catalog</button>
+      </Link>
+      </div>
       <header>
         <h1 className="header">Search For Books</h1>
       </header>
@@ -49,6 +56,7 @@ const App = () => {
           </div>
         ))}
       </div>
+      <Catalog catalog={catalog} />
     </div>
   );
 }
