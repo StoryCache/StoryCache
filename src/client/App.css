@@ -1,16 +1,23 @@
+/* Dark Academia Palette */
+:root {
+  --dark-brown: #3D2C2E;
+  --tan: #C5A68D;
+  --cream: #E9E3D0;
+  --black: #1E1E1E;
+  --gold: #A67C00;
+}
+
+body {
+  background-color: var(--dark-brown);
+  /* background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg); */
+  color: var(--cream);
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+  background-color: var(--black);
+  color: var(--cream);
+  background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg);
 }
 
 .App-header {
@@ -20,22 +27,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  color: var(--tan);
 }
 
 .search-bar {
@@ -52,20 +44,22 @@
   padding: 5px;
   border-radius: 5px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  background-color: var(--cream);
+  color: var(--black);
 }
 
 .search-bar button {
   height: 35px;
   border: none;
-  color: white;
-  background-color: #007bff;
+  color: var(--cream);
+  background-color: var(--gold);
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .search-bar button:hover {
-  background-color: #0056b3;
+  background-color: var(--tan);
 }
 
 .card-container {
@@ -78,13 +72,14 @@
 .card {
   margin: 10px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--tan);
   border-radius: 15px; 
   width: 200px;
   height: 400px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: 0.3s; 
-  background-color: #fff; 
+  background-color: var(--black); 
+  color: var(--cream);
 }
 
 .card:hover {
@@ -94,4 +89,14 @@
 .card img {
   width: 70%;
   height: auto;
+}
+
+.add-button {
+  height: 35px;
+  border: none;
+  color: var(--cream);
+  background-color: var(--gold);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }

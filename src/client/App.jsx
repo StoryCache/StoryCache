@@ -46,7 +46,7 @@ const App = () => {
             <h2>{book.volumeInfo.title}</h2>
             <p>{book.volumeInfo.authors.join(', ')}</p>
             <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="bookimg"></img>
-            <div><button onClick={() => addToCatalog(book)}>Add</button></div>
+            <div><button className="add-button" onClick={() => addToCatalog(book)}>Add</button></div>
           </div>
         ))}
       </div>
