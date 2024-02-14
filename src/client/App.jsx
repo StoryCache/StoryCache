@@ -1,14 +1,13 @@
 import "./App.css"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import placeholderBookSVG from './Placeholder_book.svg';
-import Catalog from "./Catalog";
+
 import { Link } from "react-router-dom";
 
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  // const [catalog, setCatalog] = useState([]);
 
   const handleSearch = async () => {
     try {
@@ -24,8 +23,6 @@ const App = () => {
   };
 
   const addToCatalog = async (book) => {
-    // moved this code into the try block on success
-    // setCatalog([...catalog, book]);
 
     //fetch request to post book to user books table
     const bookData = {
@@ -51,7 +48,6 @@ const App = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('book added', data);
-        // setCatalog([...catalog, book]);
       } else {
         console.error("Error adding book: ", response.statusText);
       }
@@ -96,7 +92,6 @@ const App = () => {
           </div>
         ))}
       </div>
-      {/* <Catalog catalog={catalog} /> */}
     </div>
   );
 }
