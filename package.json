@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
-    "client:dev": "vite",
+    "client:dev": "vite --host --port 5173 --open",
     "server:dev": "nodemon src/server/server.js",
     "start": "node src/server/server.js",
     "build": "tsc && vite build",
