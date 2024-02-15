@@ -8,7 +8,19 @@ import DialogContent from "@mui/material/DialogContent"
 import Button from "@mui/material/Button"
 import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from "@mui/material/FormControlLabel"
+// import { createTheme } from '@mui/material/styles';
 
+// const theme = createTheme({
+//   palette: {
+//     background: {
+//       paper: '#A67C00',
+//     },
+//     text: {
+//       primary: '#173A5E',
+//       secondary: '#46505A',
+//     },
+//   }
+// })
 const Catalog = () => {
   const [catalog, setCatalog] = useState([])
   const [alertOpen, setAlertOpen] = useState(false)
@@ -158,6 +170,7 @@ const Catalog = () => {
               onClose={() => setAlertOpen(false)}
               aria-describedby="More-book-options"
               maxWidth="xs"
+              // sx={{color: '#A67C00'}}
             >
               <DialogContent>
                 <FormControlLabel
