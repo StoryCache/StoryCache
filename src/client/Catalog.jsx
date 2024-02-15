@@ -4,30 +4,30 @@ import { Link } from "react-router-dom"
 import Dialog from "@mui/material/Dialog"
 import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
-// import DialogContentText from "@mui/material/DialogContentText"
+import DialogContentText from "@mui/material/DialogContentText"
 import Button from "@mui/material/Button"
 import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from "@mui/material/FormControlLabel"
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles"
 
 const theme = createTheme({
   palette: {
     background: {
-      paper: '#A67C00',
+      paper: "#A67C00",
     },
     primary: {
-      main: '#E9E3D0',
+      main: "#E9E3D0",
     },
     secondary: {
-      main: '#E9E3D0',
+      main: "#E9E3D0",
     },
     text: {
-      primary: '#E9E3D0',
+      primary: "#E9E3D0",
     },
     typography: {
-      fontFamily: 'Noto Serif Display',
+      fontFamily: "Noto Serif Display",
     },
-  }
+  },
 })
 const Catalog = () => {
   const [catalog, setCatalog] = useState([])
@@ -43,6 +43,7 @@ const Catalog = () => {
       const books = await response.json()
       console.log(books)
       if (response.ok) {
+        books.sort((a, b) => a.title - b.title)
         setCatalog(books)
       }
     } catch (error) {
@@ -83,34 +84,19 @@ const Catalog = () => {
   /** Below handles the own/have read/want to read options
    * as well as the put request to the database
    */
-  const handleDialogOpen = (book) => {
-    setAlertOpen(true);
-    setFocusBook(book);
+  const handleDialogOpen = book => {
+    setAlertOpen(true)
+    setFocusBook(book)
   }
 
-  const handleOwnChange = book => {
+  const handleCheckChange = label => {
     const newCatalog = [...catalog]
     newCatalog.forEach(item => {
-      if (item.title === book.title) {
-        item.own = item.own ? false : true
-      }
-    })
-    setCatalog(newCatalog)
-  }
-  const handleReadChange = book => {
-    const newCatalog = [...catalog]
-    newCatalog.forEach(item => {
-      if (item.title === book.title) {
-        item.read = item.read ? false : true
-      }
-    })
-    setCatalog(newCatalog)
-  }
-  const handleToReadChange = book => {
-    const newCatalog = [...catalog]
-    newCatalog.forEach(item => {
-      if (item.title === book.title) {
-        item.to_read = item.to_read ? false : true
+      if (item.gb_id === focusBook.gb_id) {
+        console.log(item)
+        if (label === "own") item.own = item.own ? false : true
+        else if (label === "read") item.read = item.read ? false : true
+        else if (label === "to_read") item.to_read = item.to_read ? false : true
       }
     })
     setCatalog(newCatalog)
@@ -118,10 +104,8 @@ const Catalog = () => {
 
   const handlePutRequest = async book => {
     setAlertOpen(false)
-    // const { own, read, to_read } = book
     console.log(book.own, book.read, book.to_read)
 
-    // TODO write fetch request
     const options = {
       method: "PUT",
       body: JSON.stringify({
@@ -139,7 +123,6 @@ const Catalog = () => {
       const response = await fetch("/api", options)
       const message = await response.json()
       if (response.ok) {
-        fetchBooks()
         console.log(message)
       }
     } catch (error) {
@@ -150,81 +133,88 @@ const Catalog = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <div className="Catalog">
-      <div>
-        <Link to="/search">
-          <button className="Search-Button">Search For A Book</button>
-        </Link>
-      </div>
-      <h2>Catalog</h2>
-      <div className="catalog-container">
-        {catalog.map(book => (
-          <div className="card" key={book.gb_id}>
-            <h3 className="title">{book.title}</h3>
-            <p>{book.authors}</p>
-            <img src={book.img_url} alt="bookimg"></img>
-            <div>
-              <button className="add-button" onClick={() => deleteBook(book)}>
-                Delete
-              </button>
-            </div>
-            <div>
-              <button className="add-button" onClick={() => handleDialogOpen(book)}>
-                More Options
-              </button>
-            </div>
+      <div className="Catalog">
+        <div>
+          <Link to="/search">
+            <button className="Search-Button">Search For A Book</button>
+          </Link>
+        </div>
+        <h2>Catalog</h2>
+        <div className="catalog-container">
+          {catalog.map(book => (
+            <div className="card" key={book.gb_id}>
+              <h3 className="title">{book.title}</h3>
+              <p>{book.authors}</p>
+              <img src={book.img_url} alt="bookimg"></img>
+              <div>
+                <button className="add-button" onClick={() => deleteBook(book)}>
+                  Delete
+                </button>
+              </div>
+              <div>
+                <button
+                  className="add-button"
+                  onClick={() => handleDialogOpen(book)}
+                >
+                  More Options
+                </button>
+              </div>
 
-            <Dialog
-              open={alertOpen}
-              onClose={() => setAlertOpen(false)}
-              aria-describedby="More-book-options"
-              maxWidth="xs"
-              // sx={{color: '#A67C00'}}
-            >
-              <DialogContent>
-                <FormControlLabel
-                  value="own"
-                  control={
-                    <Checkbox
-                      checked={focusBook.own}
-                      onChange={() => handleOwnChange(focusBook)}
+              <Dialog
+                open={alertOpen}
+                onClose={() => setAlertOpen(false)}
+                aria-describedby="More-book-options"
+                maxWidth="xs"
+                // sx={{color: '#A67C00'}}
+              >
+                <DialogContent>
+                  <DialogContentText>
+                    <FormControlLabel
+                      value="own"
+                      control={
+                        <Checkbox
+                          checked={focusBook.own}
+                          onChange={() => handleCheckChange("own")}
+                        />
+                      }
+                      label="I own this book"
+                      labelPlacement="end"
                     />
-                  }
-                  label="I own this book"
-                  labelPlacement="end"
-                />
-                <br></br>
-                <FormControlLabel
-                  value="read"
-                  control={
-                    <Checkbox
-                      checked={focusBook.read}
-                      onChange={() => handleReadChange(focusBook)}
+                    <br></br>
+                    <FormControlLabel
+                      value="read"
+                      control={
+                        <Checkbox
+                          checked={focusBook.read}
+                          onChange={() => handleCheckChange("read")}
+                        />
+                      }
+                      label="I have read this book"
+                      labelPlacement="end"
                     />
-                  }
-                  label="I have read this book"
-                  labelPlacement="end"
-                />
-                <FormControlLabel
-                  value="to_read"
-                  control={
-                    <Checkbox
-                      checked={focusBook.to_read}
-                      onChange={() => handleToReadChange(focusBook)}
+                    <FormControlLabel
+                      value="to_read"
+                      control={
+                        <Checkbox
+                          checked={focusBook.to_read}
+                          onChange={() => handleCheckChange("to_read")}
+                        />
+                      }
+                      label="I want to read this book"
+                      labelPlacement="end"
                     />
-                  }
-                  label="I want to read this book"
-                  labelPlacement="end"
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => handlePutRequest(focusBook)}>Submit</Button>
-              </DialogActions>
-            </Dialog>
-          </div>
-        ))}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => handlePutRequest(focusBook)}>
+                    Submit
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </ThemeProvider>
   )
 }
