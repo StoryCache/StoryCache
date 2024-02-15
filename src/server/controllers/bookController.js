@@ -24,7 +24,7 @@ booksController.getBooks = async (req, res, next) => {
   }
 }
 
-booksController.postBooks = async (req, res, next) => {
+booksController.patchBooks = async (req, res, next) => {
   // console.log("entering postBooks middleware")
   const { ssid } = req.cookies
   const { gb_id, isbn, title, author, img_url, own, read, to_read, rating } =
