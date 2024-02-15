@@ -24,7 +24,7 @@ booksController.getBooks = async (req, res, next) => {
   }
 }
 
-booksController.patchBooks = async (req, res, next) => {
+booksController.postBooks = async (req, res, next) => {
   // console.log("entering postBooks middleware")
   const { ssid } = req.cookies
   const { gb_id, isbn, title, author, img_url, own, read, to_read, rating } =
@@ -67,7 +67,7 @@ booksController.patchBooks = async (req, res, next) => {
   }
 }
 
-booksController.putBooks = async (req, res, next) => {
+booksController.patchBooks = async (req, res, next) => {
   const { ssid } = req.cookies
   const { gb_id, own, read, to_read, rating } = req.body
 
@@ -94,7 +94,7 @@ booksController.putBooks = async (req, res, next) => {
 }
 
 booksController.deleteBooks = async (req, res, next) => {
-  console.log('entering delete books middleware');
+  console.log("entering delete books middleware")
   const { ssid } = req.cookies
   const { gb_id } = req.body
   try {
