@@ -14,7 +14,7 @@ router.post("/", booksController.postBooks, (_req, res) => {
     .json({ message: "In the enchanted archives, your tome now rests." })
 })
 
-router.put("/", booksController.putBooks, (_req, res) => {
+router.put("/", booksController.patchBooks, (_req, res) => {
   res
     .status(200)
     .json({
