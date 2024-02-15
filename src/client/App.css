@@ -22,11 +22,15 @@
 }
 
 body {
+  background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg);
   background-color: var(--dark-brown);
   color: var(--cream);
 }
 
+
+
 .App {
+  /* background-image: url(https://as2.ftcdn.net/v2/jpg/05/20/52/77/1000_F_520527753_Qi0l4PLTC7E235UHwpDfD9OBUhgTyULJ.jpg); */
   font-family: Noto Serif Display;
   text-align: center;
   background-color: var(--black);
@@ -34,6 +38,7 @@ body {
 }
 
 .App-header {
+  background-color: var(--dark-brown);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -129,6 +134,7 @@ body {
 
 
 .add-button {
+  margin: 5px 0px;
   height: 35px;
   border: none;
   color: var(--cream);
@@ -140,5 +146,7 @@ body {
 }
 
 .Catalog-Button {
+  margin: 5px 0px;
+  width: 98%;
   font-family: Noto Serif Display;
 }
