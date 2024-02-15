@@ -8,19 +8,27 @@ import DialogContent from "@mui/material/DialogContent"
 import Button from "@mui/material/Button"
 import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from "@mui/material/FormControlLabel"
-// import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// const theme = createTheme({
-//   palette: {
-//     background: {
-//       paper: '#A67C00',
-//     },
-//     text: {
-//       primary: '#173A5E',
-//       secondary: '#46505A',
-//     },
-//   }
-// })
+const theme = createTheme({
+  palette: {
+    background: {
+      paper: '#A67C00',
+    },
+    primary: {
+      main: '#E9E3D0',
+    },
+    secondary: {
+      main: '#E9E3D0',
+    },
+    text: {
+      primary: '#E9E3D0',
+    },
+    typography: {
+      fontFamily: 'Noto Serif Display',
+    },
+  }
+})
 const Catalog = () => {
   const [catalog, setCatalog] = useState([])
   const [alertOpen, setAlertOpen] = useState(false)
@@ -141,6 +149,7 @@ const Catalog = () => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="Catalog">
       <div>
         <Link to="/search">
@@ -216,6 +225,7 @@ const Catalog = () => {
         ))}
       </div>
     </div>
+    </ThemeProvider>
   )
 }
 
