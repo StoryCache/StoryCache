@@ -56,7 +56,7 @@ const App = () => {
     }
   };
 
-  
+
 
   return (
     <div className="App">
@@ -75,7 +75,7 @@ const App = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for books..."
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="search-btn" onClick={handleSearch}>Search</button>
       </div>
       <div className="card-container">
         {searchResults.map((book) => (
